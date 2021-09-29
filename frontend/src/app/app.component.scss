@@ -1,0 +1,52 @@
+
+*{
+  padding: none;
+  margin: none;
+  box-sizing: border-box;
+}
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+}
+#labels-section{
+  margin-top: 3rem;
+
+  width: 80%;
+  padding: 2rem;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+}
+#annotation-section{
+  margin-top: 3rem;
+  width: 80%;
+  display: flex;
+  flex-direction:  column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+};
+
+.input {
+  width: 80%;
+}
+mat-chip {
+  border-radius: 0;
+  color: white;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-chip > span {
+  background-color: white;
+  font-size: small;
+  margin: -5px;
+  padding: 2px;
+}

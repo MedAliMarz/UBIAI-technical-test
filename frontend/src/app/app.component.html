@@ -1,0 +1,63 @@
+
+
+
+  <main id="main">
+
+  <section id="labels-section">
+
+    <h3>Label list</h3>
+    <mat-form-field class="input" appearance="outline">
+      <mat-chip-list #chipList aria-label="label selection" [selectable]="true"
+     >
+        <mat-chip *ngFor="let label of labels" [style.background-color]="label.color"
+
+        #chip="matChip"  (click)='chip.select()'
+        [selectable]="selectable"
+        (selectionChange)="onLabelChange($event, label)"
+                [removable]="removable" (removed)="remove(label)" >
+          {{label.name}}
+          <button matChipRemove *ngIf="removable">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+        autofocus
+          size="large" placeholder="New label..."
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <input type="color" hidden #colorPicker>
+    </mat-form-field>
+
+  </section>
+
+  <section id="annotation-section">
+    <mat-card>
+      <mat-card-title>Annotated Text</mat-card-title>
+      <mat-card-subtitle>Text to be annotated using the above lables</mat-card-subtitle>
+      <mat-card-content (document:mousedown)="onMouseDown($event)" (document:mouseup)="onMouseUp($event)" >
+
+        <span *ngFor="let word of words" >
+          <mat-chip *ngIf="word.label; else normal" (click)="onDeleteWord($event,word)" [style.background-color]="word.label?.color">
+            {{word.text}}
+            <span>
+              {{word.label.name}}
+            </span>
+          </mat-chip>
+
+          <ng-template #normal>
+            {{word.text}}
+          </ng-template>
+
+        </span>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="accent" (click)="onExportAnnotation()">Export Annotations</button>
+      </mat-card-actions>
+    </mat-card>
+
+
+  </section>
+  </main>
